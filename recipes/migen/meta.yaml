@@ -1,0 +1,60 @@
+package:
+  name: migen
+  version:{{ environ.get("GIT_DESCRIBE_TAG", "") }}
+
+source:
+  # url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://github.com/chipmuenk/migen/archive/{{ version }}.tar.gz
+  sha256: d58439c548433adcda98e695be53e526ba940a4b9c44fb9a05d92cd495cdd47f
+  # sha256 is the preferred checksum -- you can get it for a file with:
+  #  `openssl sha256 <file name>`.
+  # You may need the openssl package, available on conda-forge:
+  #  `conda install openssl -c conda-forge``
+
+build:
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  build:
+    - python 3.5*
+    - sphinx
+    - sphinx_rtd_theme
+    - colorama
+  host:
+    - python
+    - pip
+  run:
+    - python
+    - colorama
+test:
+  # List all the packages/modules that `run_test.py` imports.
+  imports:
+    - migen
+
+about:
+  home: https://m-labs.hk/gateware.html
+  # Remember to specify the license variants for BSD, Apache, GPL, and LGPL.
+  # Prefer the short version, e.g: GPL-2.0 instead of GNU General Public License version 2.0
+  # See https://opensource.org/licenses/alphabetical
+  license: MIT
+  # The license_family, i.e. "BSD" if license is "BSD-3-Clause". (optional)
+  license_family: MIT
+  # It is strongly encouraged to include a license file in the package,
+  # (even if the license doesn't require it) using the license_file entry.
+  # See https://conda.pydata.org/docs/building/meta-yaml.html#license-file
+  license_file: LICENSE
+  summary: 'A Python toolbox for building complex digital hardware'
+
+  # The remaining entries in this section are optional, but recommended.
+  description: |
+    migen is  Python toolbox for building complex digital hardware 
+    <https://xxxx>  
+    doc_url: https://migen.readthedocs.io/
+    dev_url: https://github.com/migen/migen
+
+extra:
+  recipe-maintainers:
+    # GitHub IDs for maintainers of the recipe.
+    - Chipmuenk
